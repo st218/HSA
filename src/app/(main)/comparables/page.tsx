@@ -163,7 +163,7 @@ export default function Comparables() {
                 <p className="mt-2 text-red-800 dark:text-red-200">
                     In the March 4, 2025 court order, StockX was found liable for distributing counterfeit goods
                     (37 pairs total: 4 to Nike investigators, 33 to Roy Kim). This demonstrates that
-                    <strong> "verified authentic" claims are court-testable</strong>—and adversaries will test them.
+                    <strong> &quot;verified authentic&quot; claims are court-testable</strong>—and adversaries will test them.
                 </p>
                 <p className="mt-3 text-sm text-red-700 dark:text-red-300">
                     <strong>HSA implication:</strong> Design with conservative states, tight chain-of-custody artifacts,
@@ -227,7 +227,7 @@ export default function Comparables() {
                                     {chinaMarketContext.dewuModel.name}
                                 </h4>
                                 <p className="text-sm text-green-600 dark:text-green-400 italic">
-                                    "{chinaMarketContext.dewuModel.slogan}" — {chinaMarketContext.dewuModel.english}
+                                    &quot;{chinaMarketContext.dewuModel.slogan}&quot; — {chinaMarketContext.dewuModel.english}
                                 </p>
                             </div>
                         </div>

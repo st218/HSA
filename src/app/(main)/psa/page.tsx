@@ -435,10 +435,10 @@ export default function PSACaseStudy() {
                     Implication for HSA
                 </h3>
                 <p className="mt-2 text-indigo-800 dark:text-indigo-200">
-                    PSA's success demonstrates that trust services can achieve ~57% gross margins at scale.
+                    PSA&apos;s success demonstrates that trust services can achieve ~57% gross margins at scale.
                     The moat comes from network effects (registry + population report), financial accountability
                     (guarantee + buyback), and tamper-evident artifacts. HSA must replicate these mechanics
-                    while adapting for bags' unique challenges: repairability, state changes, and higher
+                    while adapting for bags&apos; unique challenges: repairability, state changes, and higher
                     claim severity.
                 </p>
             </section>

@@ -305,7 +305,7 @@ export default function Security() {
                     <div className="rounded-xl border border-red-200 bg-red-50 p-5 dark:border-red-900 dark:bg-red-950/20">
                         <h4 className="flex items-center gap-2 font-semibold text-red-900 dark:text-red-100">
                             <RiCloseLine className="h-5 w-5" />
-                            Don't Do This
+                            Don&apos;t Do This
                         </h4>
                         <ul className="mt-3 space-y-2">
                             {legalPosture.claimLanguage.doNot.map((item: string, idx: number) => (
@@ -435,7 +435,7 @@ export default function Security() {
                     <div className="rounded-xl border border-red-200 bg-red-50 p-5 dark:border-red-900 dark:bg-red-950/20">
                         <h4 className="flex items-center gap-2 font-semibold text-red-900 dark:text-red-100">
                             <RiCloseLine className="h-5 w-5" />
-                            Don't Do This
+                            Don&apos;t Do This
                         </h4>
                         <ul className="mt-3 space-y-2">
                             {legalClaimsGuidelines.dontList.map((item: string, idx: number) => (

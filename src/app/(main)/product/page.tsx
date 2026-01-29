@@ -229,7 +229,7 @@ export default function Product() {
                 <p className="mt-2 text-orange-800 dark:text-orange-200">
                     If COGS = $220 and target GM = 60%, minimum price ≈ <strong>$550</strong>.
                     If COGS = $320 (with seal), minimum price ≈ <strong>$800</strong>.
-                    These are mechanistically consistent with PSA's ~57% FY2020 gross margin, but HSA
+                    These are mechanistically consistent with PSA&apos;s ~57% FY2020 gross margin, but HSA
                     has higher liability severity—target higher dollar contribution per unit than PSA.
                 </p>
             </section>

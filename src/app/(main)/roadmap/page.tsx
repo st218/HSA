@@ -211,15 +211,15 @@ export default function Roadmap() {
                 </h3>
                 <p className="mt-2 text-orange-800 dark:text-orange-200">
                     HSA is viable only if treated as a <strong>trust infrastructure company</strong> with a
-                    cryptographically bound "digital slab" and a defensible grading standard—not as a
-                    marketplace feature. PSA's success is the blueprint: multi-rater grading, tamper-evident
+                    cryptographically bound &quot;digital slab&quot; and a defensible grading standard—not as a
+                    marketplace feature. PSA&apos;s success is the blueprint: multi-rater grading, tamper-evident
                     artifacts, public verification rails, and financial accountability that the market can
                     price into transactions.
                 </p>
                 <p className="mt-4 text-orange-800 dark:text-orange-200">
                     We proceed because (a) unit economics for trust services can be excellent (PSA demonstrates
                     ~57% gross margin at scale), and (b) China and global resale behavior shows escalating
-                    demand for "authenticate-first" workflows, but <strong>no cross-market Hermès grading
+                    demand for &quot;authenticate-first&quot; workflows, but <strong>no cross-market Hermès grading
                         standard exists yet</strong>.
                 </p>
                 <p className="mt-4 font-medium text-orange-900 dark:text-orange-100">
