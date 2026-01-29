@@ -1,6 +1,7 @@
 {
-  "name": "template-dashboard-open-source-version",
-  "version": "0.1.0",
+  "name": "investment-report-template",
+  "version": "1.0.0",
+  "description": "Tremor + Next.js template for creating professional investment reports",
   "private": true,
   "scripts": {
     "dev": "next dev",

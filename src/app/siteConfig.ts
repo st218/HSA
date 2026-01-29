@@ -1,7 +1,16 @@
+// =============================================================================
+// SITE CONFIGURATION
+// =============================================================================
+// This file provides site metadata for Next.js.
+// It imports from report.config.ts for centralized configuration.
+// =============================================================================
+
+import { reportConfig } from "@/report.config"
+
 export const siteConfig = {
-  name: "HSA Investment Report",
-  url: "https://hsa-report.example.com",
-  description: "Decision-Grade Trust Infrastructure Memo: Building the PSA of Hermès Bags",
+  name: reportConfig.report.name,
+  url: reportConfig.report.url,
+  description: reportConfig.report.subtitle,
   baseLinks: {
     home: "/",
     overview: "/overview",
@@ -15,7 +24,7 @@ export const siteConfig = {
     settings: "/settings",
   },
   externalLink: {
-    blocks: "https://blocks.tremor.so/templates#dashboard",
+    blocks: reportConfig.externalLinks.tremor,
   },
 }
 
