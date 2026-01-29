@@ -1,12 +1,24 @@
 # Investment Report Template
 
-A **Tremor + Next.js** template for creating professional investment reports and due diligence memos. Built to be easily customized by humans or AI agents.
+A **Tremor + Next.js** template for creating professional, "decision-grade" investment reports and due diligence memos. Built to be easily customized by humans or AI agents.
 
 ![Next.js](https://img.shields.io/badge/Next.js-15-black)
 ![Tremor](https://img.shields.io/badge/Tremor-3.18-indigo)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.x-blue)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.4-cyan)
 
-## 🚀 Quick Start
+## � What is a "Decision-Grade" Report?
+
+This template is not just a dashboard; it's an **argumentative artifact**. It is designed to implement the "Decision-Grade" philosophy:
+
+1.  **Clear Stance**: Every report starts with a specific decision ("PROCEED", "KILL", etc.) in the `ExecutiveHero`.
+2.  **Sourced Data**: Every number (`MetricCard`) supports a source field to verify truth.
+3.  **Falsifiability**: The `Risk` and `Security` pages encourage stating specific kill criteria.
+4.  **Interactive Modeling**: The `Product` page supports interactive calculators (`UnitEconomicsCalculator`) to test assumptions live.
+
+---
+
+## �🚀 Quick Start
 
 ```bash
 # Clone the template
@@ -30,107 +42,58 @@ This template separates **content** from **presentation** to allow for rapid rep
 
 ### The "Data-First" Model
 
-1. **Configuration**: `src/report.config.ts` controls global settings (branding, navigation, metadata).
-2. **Schema**: `src/data/report-schema.ts` defines the strict TypeScript structure for your data.
-3. **Content**: `src/data/report-data.ts` contains the actual report text, numbers, and logic.
-4. **UI**: Components in `src/app/` consume this data to render the report.
-
-This means you can often rewrite an entire report just by modifying the two files in steps 1 and 3.
+1.  **Configuration**: `src/report.config.ts` controls global settings (branding, navigation, metadata).
+2.  **Schema**: `src/data/report-schema.ts` defines the strict TypeScript structure for your data.
+3.  **Content**: `src/data/report-data.ts` contains the actual report text, numbers, and logic.
+4.  **UI**: Components in `src/app/` consume this data to render the report.
 
 ---
 
-## 📁 Project Structure
+## 📁 Project Structure Deep Dive
 
 ```
 ├── src/
-│   ├── report.config.ts          # ⚙️ MAIN CONFIG - Edit this first!
+│   ├── report.config.ts          # ⚙️ GLOBAL CONTROL CENTER
 │   ├── app/
-│   │   ├── siteConfig.ts         # Site metadata (uses report.config)
-│   │   └── (main)/               # Navigation Routes
-│   │       ├── overview/         # Executive summary
-│   │       ├── psa/              # Case study page
-│   │       ├── comparables/      # Market comparables
-│   │       ├── product/          # Product/service model
-│   │       ├── security/         # Security & threat model
-│   │       ├── risk/             # Risk register
-│   │       ├── roadmap/          # Timeline & milestones
-│   │       └── sources/          # References
-│   ├── components/ui/report/     # Reusable specialized report components
+│   │   ├── layout.tsx            # Root layout (fonts, providers)
+│   │   ├── siteConfig.ts         # Metadata mapping
+│   │   └── (main)/               # App Router Group (Sidebar Layout)
+│   │       ├── layout.tsx        # Sidebar + Header Wrapper
+│   │       ├── overview/         # [PAGE] Executive Summary
+│   │       ├── product/          # [PAGE] Unit Economics
+│   │       ├── ...               # Other report pages
+│   ├── components/
+│   │   ├── ...                   # Base UI (Buttons, Charts)
+│   │   └── ui/report/            # ✨ Specialized Report Components
 │   └── data/
-│       ├── report-schema.ts      # TypeScript interfaces (Do not edit)
-│       └── report-data.ts        # 📊 YOUR DATA - Main content file
-├── templates/                    # Empty starter templates for new reports
-├── AGENT_INSTRUCTIONS.md         # 🤖 Implementation guide for AI agents
-└── README.md                     # This file
+│       ├── report-schema.ts      # Data Contracts (Interfaces)
+│       └── report-data.ts        # Content Repository
 ```
 
 ---
 
-## 🔧 Customization Guide
+## 🔧 Customization & Theming
 
-### Step 1: Configure Your Report
+### Changing Colors
+The template uses Tailwind CSS colors. To change the visual theme:
+1.  Open `src/report.config.ts`.
+2.  Change `theme.primaryColor` to one of the presets: `"indigo"`, `"blue"`, `"purple"`, `"emerald"`, `"orange"`, `"red"`.
 
-Edit `src/report.config.ts` to set up your report identity.
+To add **custom colors**:
+1.  Edit `tailwind.config.ts`.
+2.  Extend the `colors` object.
+3.  Update the `Safelist` in `src/lib/utils.ts` if creating dynamic badge colors.
 
-```typescript
-export const reportConfig = {
-  report: {
-    name: "Project Titan Due Diligence",
-    subtitle: "Series B Investment Memo",
-    // This badge will appear in the header and executive summary
-    // Options: "PROCEED" | "PROCEED WITH CONSTRAINTS" | "DO NOT PROCEED" | "FURTHER ANALYSIS NEEDED"
-    decision: "PROCEED WITH CONSTRAINTS",
-  },
-  navigation: {
-    // Disable pages you don't need to simplify the sidebar
-    psa: { enabled: false, label: "Case Study" },
-  },
-  theme: {
-    // Change the primary accent color across the entire app
-    primaryColor: "emerald", 
-  }
-}
-```
+### Changing Fonts
+The project uses `Inter` (Google Font) by default.
+1.  Open `src/app/layout.tsx`.
+2.  Import a new font from `next/font/google`.
+3.  Apply it to the `<body>` className.
 
-### Step 2: Add Your Data
-
-Edit `src/data/report-data.ts`. This file exports objects that map 1:1 with the report sections.
-
-**Key Definition:**
-Each piece of data typically follows the `SourcedValue` pattern to track where it came from:
-```typescript
-{ 
-  value: 700, 
-  source: "SEC Filing 2020", 
-  isVerified: true // Shows a green checkmark if true, orange warning if false
-}
-```
-
-### Step 3: Advanced Customization (Adding Pages)
-
-To add a completely new page (e.g., `/team`):
-
-1. **Create the Page File**:
-   Create `src/app/(main)/team/page.tsx`.
-   
-   ```tsx
-   import { SectionHeader } from "@/components/ui/report/SectionHeader"
-   
-   export default function TeamPage() {
-     return (
-       <div className="space-y-6">
-         <SectionHeader title="Team" subtitle="Key personnel" badge="People" />
-         {/* Your content */}
-       </div>
-     )
-   }
-   ```
-
-2. **Update Configuration**:
-   Add the new route to `src/report.config.ts` (you may need to extend the type in `config.ts` if adding to the typed navigation object, or just edit `src/components/ui/navigation/sidebar.tsx` directly).
-
-3. **Update Sidebar**:
-   If you added a custom route not in the default config, edit `src/components/ui/navigation/sidebar.tsx` to include your new link.
+### Icons
+We use **Remix Icons** (`@remixicon/react`).
+- Browse icons here: [Remix Icon Library](https://remixicon.com/)
+- Import usage: `import { RiMoneyDollarCircleLine } from "@remixicon/react"`
 
 ---
 
@@ -139,7 +102,7 @@ To add a completely new page (e.g., `/team`):
 The template comes with specialized components in `src/components/ui/report/` designed for investment memos.
 
 | Component | Props | Purpose |
-|-----------|-------|---------|
+| :--- | :--- | :--- |
 | `SectionHeader` | `title`, `subtitle`, `badge` | Standard header for every main section. |
 | `MetricCard` | `title`, `value`, `description` | High-visibility stats. Good for Key Metrics in Overview. |
 | `ExecutiveHero` | `data` (ExecutiveSummary) | The large banner on the Overview page showing the decision. |
@@ -149,6 +112,7 @@ The template comes with specialized components in `src/components/ui/report/` de
 | `AnimatedComponents` | `children`, `delay` | `FadeIn` wrapper for smooth page loads. |
 
 **Example: Creating a Metric Row**
+
 ```tsx
 import { MetricCard } from "@/components/ui/report/MetricCard"
 import { keyMetrics } from "@/data/report-data"
@@ -159,12 +123,28 @@ import { keyMetrics } from "@/data/report-data"
     value={keyMetrics.revenue.value}
     description="FY2023"
   />
-  <MetricCard 
-    title="Growth"
-    value={keyMetrics.growth.value}
-    description="YoY"
-  />
+  {/* ... */}
 </div>
+```
+
+---
+
+## 📊 Data Visualization
+
+This template uses **Tremor** for charts. To add a new chart:
+
+1.  **Import Component**: `import { BarChart, DonutChart } from "@tremor/react"`
+2.  **Prepare Data**: Ensure your data in `report-data.ts` is an array of objects.
+3.  **Render**:
+
+```tsx
+<BarChart
+  data={financialHistory}
+  index="year"
+  categories={["Revenue", "Profit"]}
+  colors={["indigo", "cyan"]}
+  valueFormatter={(number) => `$${number.toLocaleString()}`}
+/>
 ```
 
 ---
@@ -186,10 +166,9 @@ When pasting text into JSX, special characters like quotes (`"`) and apostrophes
 ```
 
 ### Type Mismatches
-
-If you see TypeScript errors in `report-data.ts`, check `src/data/report-schema.ts`.
-- Ensure expected optional fields (`?`) are handled.
-- Ensure enums (like `likelihood: "Low" | "Medium"`) match exactly (case-sensitive).
+If you see TypeScript errors in `report-data.ts`:
+- Check `src/data/report-schema.ts` for valid string unions (e.g. `likelihood` must be exactly `"Low" | "Medium" | ...`).
+- Ensure optional fields (`?`) are handled if you are trying to access them directly in UI code.
 
 ---
 
@@ -197,19 +176,12 @@ If you see TypeScript errors in `report-data.ts`, check `src/data/report-schema.
 
 ### Vercel (Recommended)
 
-1. Push your code to a Git repository (GitHub/GitLab/Bitbucket).
-2. Create a new project in Vercel and import the repository.
-3. Vercel will auto-detect the Next.js framework.
-4. Click **Deploy**.
+1.  Push your code to a Git repository (GitHub/GitLab/Bitbucket).
+2.  Create a new project in Vercel and import the repository.
+3.  Vercel will auto-detect the Next.js framework.
+4.  Click **Deploy**.
 
 No environment variables are required for the basic template.
-
-### Manual Build
-
-```bash
-pnpm build
-pnpm start
-```
 
 ---
 
@@ -218,11 +190,12 @@ pnpm start
 See **[AGENT_INSTRUCTIONS.md](./AGENT_INSTRUCTIONS.md)** for detailed instructions on retrofitting new reports into this template.
 
 The workflow for agents is:
-1. **Analyze** source document.
-2. **Configure** `report.config.ts`.
-3. **Populate** `report-data.ts` using the schema.
-4. **Refine** page layouts if sections are missing/extra.
-5. **Verify** build.
+
+1.  **Analyze** source document.
+2.  **Configure** `report.config.ts`.
+3.  **Populate** `report-data.ts` using the schema.
+4.  **Refine** page layouts if sections are missing/extra.
+5.  **Verify** build.
 
 ---
 
@@ -231,4 +204,5 @@ The workflow for agents is:
 MIT License - See [LICENSE.md](./LICENSE.md)
 
 ---
+
 Built with [Tremor](https://tremor.so) • [Next.js](https://nextjs.org)
