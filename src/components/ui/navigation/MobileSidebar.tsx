@@ -22,7 +22,7 @@ import { usePathname } from "next/navigation"
 
 const navigation = [
   { name: "Overview", href: siteConfig.baseLinks.overview, icon: RiHome2Line },
-  { name: "Details", href: siteConfig.baseLinks.details, icon: RiListCheck },
+  { name: "PSA Study", href: siteConfig.baseLinks.psa, icon: RiListCheck },
   {
     name: "Settings",
     href: siteConfig.baseLinks.settings,

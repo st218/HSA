@@ -1,7 +1,14 @@
 import { Badge } from "@/components/Badge"
 import { ProgressBar } from "@/components/ProgressBar"
 
-import { KpiEntry } from "@/app/(main)/overview/page"
+// Local type definition to avoid cross-file import issues
+export type KpiEntry = {
+  title: string
+  percentage: number
+  current: string | number
+  allowed: string | number
+  unit: string
+}
 
 export type CardProps = {
   title: string

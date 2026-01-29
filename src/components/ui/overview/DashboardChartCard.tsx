@@ -1,4 +1,6 @@
-import { PeriodValue } from "@/app/(main)/overview/page"
+// Local type definition to avoid cross-file import issues
+export type PeriodValue = "previous-period" | "last-year" | "no-comparison"
+
 import { Badge } from "@/components/Badge"
 import { LineChart } from "@/components/LineChart"
 import { overviews } from "@/data/overview-data"

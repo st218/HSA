@@ -1,0 +1,1862 @@
+Total pages: 29
+
+=== Page 1 ===
+PSA for Hermès Bags: Decision-Grade Trust
+Infrastructure Memo + Build Plan for HSA
+Executive summary
+0) Executive decision: Proceed with constraints — run a tightly-scoped 12–18 month build with explicit
+kill criteria and a trust-first operating model (authentication + rating/grading + guarantee + chain-of-
+custody artifact), not a GMV-first marketplace.
+What matters (and what must be true)
+HSA  can  be  “the  PSA  of  Hermès”  only  if  it  becomes  the  reference  standard for  (i)  authenticity
+determination, and (ii)  auditable, repeatable condition/originality grading that becomes legible to
+buyers, resellers, insurers, and marketplaces. PSA’s defensibility comes from (a) a widely accepted numeric
+grade signal, (b) a tamper-evident physical artifact bound to a database-verified certificate number, and (c) a
+financial guarantee + error-correction machinery that market participants can underwrite into pricing
+behavior. PSA explicitly commits to grading “under PSA grading standards,” uses “two or more… graders”
+who “must agree upon a grade,” and offers a buyback/refund mechanism if a grade is later determined
+incorrect. 
+HSA must replicate those trust mechanics for Hermès bags, but with redesigns for (1) high-value, repairable
+goods  where  “state  changes”  (spa/repair,  component  swaps)  are  common,  and  (2)  an  adversarial
+environment where simple certificates and naïve NFC tags fail quickly.
+Biggest risks (adversarial framing)
+The  primary  failure  mode  is  not  demand.  It  is  standard  failure:  inconsistent  grading,  tag  decoupling
+(certificate → bag mismatch), or guarantee blow-ups that collapse trust. Secondary risks are brand/IP
+pressure (luxury tends to litigate more aggressively than hobby collectibles), and counterfeit adaptation
+that targets HSA’s weakest link (usually chain-of-custody and re-sale verification surfaces).
+Key numbers (Verified vs Estimated vs Unknown)
+Verified (primary sources): -  PSA/Collectors Universe FY2020 performance: net revenues  $78.891M,
+gross profit $45.236M (gross margin ~57.3%), operating income $14.102M (operating margin ~17.9%). 
+-  Collectors  Universe  segment  profitability  (FY2020): Coins  generated  $41.599M net  revenues  with
+$11.995M segment operating income; Trading Cards & Autographs generated $33.673M net revenues with
+$9.328M segment operating income. 
+-  PSA demand throttle mechanics: higher fees for faster turnaround are a margin driver (mix shifts to
+faster service increases ASP). 
+- PSA guarantee mechanics (baseline analog for HSA): If PSA later concludes a card no longer merits the
+assigned grade or fails authenticity standards, PSA will  buy the card (in some cases) or  refund the
+difference in value if the grade is lowered. 
+- PSA current service-tier pricing (illustrative ASP range): e.g., Value Plus $44.99/card, Regular $74.99,
+Express $149.99, Super Express $299.99, Walk-Through $599.99, plus higher service levels. 
+- Entrupy Hermès premium unit price (competitive reference): Hermès handbags/clutches priced $119
+1
+2
+2
+3
+1
+4
+1
+
+=== Page 2 ===
+per authentication, results “within 24 hours” (Entrupy pricing page). 
+- StockX promise scope (authenticity + condition gate): StockX states items are “Verified by StockX” (not
+endorsed by brands) and accepts handbags only in “Brand new” condition (includes required packaging/
+accessories). 
+-  StockX Buyer Promise dispute window: buyer must notify StockX “within 10 days” of receipt; if a
+“Verified Authentic” tag was attached, “the original tag must remain attached” for a claim. 
+-  StockX trust controversy matters because it becomes court-testable: In  Nike, Inc. v. StockX LLC, the
+court order (Mar 4, 2025) granted partial summary judgment that StockX is liable for distributing counterfeit
+goods re: 4 pairs sold to Nike investigators and 33 pairs sold to Roy Kim. 
+-  Why  naïve  NFC  fails,  in  one  line: academic  work  notes  that  NFC  Forum  does  not  specify  a  tag
+authentication mechanism; absent that, NFC tags “cannot be used for secure product identification,” and
+cloning is a core concern. 
+-  Minimum secure NFC direction (what “good” looks like): NXP’s NTAG 424 DNA describes AES-128
+cryptography generating a tap-unique Secure Unique NFC (SUN) message; the phone reads a “tap-unique
+URL,” sends it to a host, and the host verifies authenticity. 
+Estimated (explicit assumptions; sensitivity required): - HSA Grade + Seal target price: $550–$850/bag
+depending on declared value and turnaround (estimate; see C3 model).
+- HSA fully-loaded cost per graded bag (labor + overhead + materials + dispute reserve): $180–$320/bag
+(estimate; sensitivity in C3).
+- HSA launch dispute rate: 0.4%–1.0% within 90 days (estimate; must be empirically validated via pilots).
+- HSA  break-even (single hub):  ~300–800 bags/month depending on wage geography + fixed footprint
+(estimate; see C3). 
+Unknown (must be discovered during diligence/pilot): - True counterfeit base rate in Hermès resale
+submissions by region + channel; true false-negative severity distribution (tail risk).
+- Brand enforcement posture toward a third-party “grading” standard for handbags in target jurisdictions.
+- Long-run willingness-to-pay for graded condition, not just authenticity, among top Hermès dealers.
+Falsification checklist (30–60 day tests; pass/fail thresholds)
+These are designed as kill switches, not vanity KPIs:
+Inter-rater reliability: on n=120 bags (balanced across condition tiers), achieve ≥85% agreement
+within ±1 condition notch and ≥70% exact-match on final condition tier after protocol training; 
+fail if <75% within ±1. 
+Counterfeit catch-rate (seeded red team): insert n=40 known counterfeits/superfakes (sourced
+legally for testing) across categories; pass if 0 are certified authentic and ≤5% become
+“inconclusive”; fail if ≥1 passes as authentic. 
+Tag security (lab attack): attempt clone/replay/tag transplant on n=30 tags; pass if successful
+counterfeit verification is 0% under documented attacker models; fail if any attack yields a “valid”
+verification state. 
+Certificate-to-bag binding audit: for n=200 certified bags, randomly re-run verification at 2 weeks;
+pass if ≥99.5% resolve to correct bag identity + state; fail if any systematic mismatch appears. 
+Dispute handling SLA: resolve ≥90% of disputes within 10 business days; fail if median >15
+business days (trust corrosion). 
+Dealer adoption (standard credibility): sign ≥6 high-velocity Hermès resellers to written “use-
+grade-in-listing” commitments (or API integration LOIs); fail if <3. 
+5
+6
+7
+8
+9
+10
+1. 
+2. 
+3. 
+4. 
+5. 
+6. 
+2
+
+=== Page 3 ===
+Price premium evidence: blind A/B marketplace test with partner: same bag listings with/without
+HSA grade; pass if HSA-grade listings show ≥10% higher conversion or ≥5% higher net realized
+price at constant exposure; fail if no measurable effect. 
+Loss ratio ceiling: in pilot, keep total guarantee payouts + refunds ≤0.5% of certified declared
+value; fail if >1.0% (unsustainable guarantee economics). 
+Throughput feasibility: hit stable run-rate of ≥6 fully graded bags/authenticator/day (net of QC
+and rework) by week 8; fail if <4 without clear fix. 
+Brand/IP risk scan: obtain counsel memo + monitoring: no credible C&D with injunctive threat in
+first 60 days; fail if litigation risk becomes immediate and existential.
+Definitions & taxonomy
+Definitions & taxonomy (required)
+Authentication = a determination that an item is genuine (or not) based on evidence and expert judgment;
+it is not “title.” eBay explicitly distinguishes that its authenticity certificate is a “tool” and “does not represent
+title to the physical good.” 
+Grading = a standardized evaluation of physical state/quality (often numeric) intended to be comparable
+across items; PSA grades on a 1–10 scale and positions its grade as a market signal. 
+Rating = a categorical or tiered condition signal (often not as granular as a formal grade). 
+Certificate = a verifiable record asserting authentication and/or grade; for resilience it must be bound to an
+immutable identifier and ideally to evidence (photos, measurements). Entrupy certificates are hosted on
+Entrupy’s servers and meant to be validated by entering the certificate link. 
+Chain-of-custody = documented control states describing when the certifier had physical possession vs
+when the item is “out of custody,” which changes what can be guaranteed.
+Tamper-evident = physical design where attempts to open/alter leave evidence; PSA describes holder
+tamper evidence via “frosting” and changes in plastic rigidity after sonic weld violation. 
+Registry = a database of certified items and their attributes; PSA provides certification verification and
+encourages public cert checks. 
+Population report = aggregate data describing how many items exist in each grade; PSA markets its
+Population Report as a core collector resource. 
+SLA = a service level agreement defining turnaround + dispute handling, essential because PSA and others
+explicitly warn turnaround times are estimates and can change with capacity. 
+Loss ratio = for HSA, payouts + refunds + dispute costs divided by revenue or declared value; must be
+bounded for a viable guarantee product.
+7. 
+8. 
+9. 
+10. 
+11
+12
+13
+14
+15
+16
+17
+3
+
+=== Page 4 ===
+Chargeback = payments reversed by card networks; in trust services, chargebacks correlate with disputed
+authenticity/condition.
+False positive / false negative = for authentication: - false positive = authentic item rejected (customer pain,
+reputational cost)
+- false negative = counterfeit certified authentic (existential trust failure)
+Secure element = hardware designed to store cryptographic secrets and execute secure operations.
+Cryptographic NFC, challenge–response, key management = systems where tags prove authenticity via
+cryptographic operations, not static identifiers. NXP’s NTAG 424 DNA describes AES-based SUN messages
+and backend verification, which is the direction HSA must use. 
+Part A — PSA Case Study
+A1) PSA history & timeline (concise but complete)
+Timeline table (mechanism-first)
+Date
+Event
+Why it mattered (mechanism)
+Evidence
+1986
+PCGS founded
+Establishes slab-based grading
++ trust artifact pattern later
+mirrored in other categories
+Collectors Universe 10-K notes
+PCGS founded 1986. 
+1991
+PSA founded
+Creates independent third-
+party grading standard for
+cards; slab + population/
+registry loop becomes price
+signal
+Collectors Universe 10-K notes
+PSA founded 1991.
+cite turn3view0 ȹ
+2001
+PSA Set Registry
+opened (2002 awards)
+Formalizes competition +
+status incentives; strengthens
+network effects and switching
+costs
+PSA “Set Registry Started in
+2001… Awards… 2002.” 
+FY2020
+(June 30,
+2020)
+$78.9M revenue with
+~57% gross margin
+Demonstrates scaled unit
+economics of trust services
+(labor-heavy but high GM with
+operating leverage)
+Collectors Universe FY2020
+financials. 
+Sep 30,
+2020
+Record backlog
+(cards/autographs);
+ASP increases via
+faster turnaround
+tiers
+Shows demand shocks and
+how tiered pricing/turnaround
+acts as throttle; backlog is a
+moat only if trust remains
+intact
+Collectors Universe 10-Q
+discusses record backlog and
+higher ASP from faster
+service. 
+10
+2
+2
+18
+4
+
+=== Page 5 ===
+Date
+Event
+Why it mattered (mechanism)
+Evidence
+Nov 30,
+2020
+Take-private
+announced: $75.25/
+share, ~$700M
+Ownership shift enables
+capital + capacity expansion;
+also signals strategic value of
+trust infrastructure
+Company press release via
+GlobeNewswire. 
+Feb 22,
+2021
+Acquisition completed
+Confirms post-public
+ownership and expansion
+pathway
+Business Wire announcement.
+Dec 2,
+2021
+Collectors acquires
+Card Ladder
+Strengthens pricing-data rails
+and potentially accelerates
+standard propagation (pricing
++ registry complements
+grading trust)
+PSA/Collectors article on Card
+Ladder acquisition. 
+May 16,
+2024
+Collectors + eBay
+transactions close
+(vault/flow
+integration)
+Distribution: embeds grading
+into transaction flow, making
+the standard “default”
+behavior
+PR Newswire release. 
+Corporate structure & leadership / ownership shifts
+Collectors Universe (public) historically owned PSA and PCGS; it disclosed segment reporting across Coins,
+Trading Cards & Autographs, and “Other,” showing authentication is the core revenue engine. 
+The investor group led by Nat Turner completed acquisition in Feb 2021 (take-private). 
+Collectors’ current leadership page lists Nat Turner as Chairman & CEO and Steve Cohen among board
+members, and lists brands including PSA, PSA Vault, PCGS, Beckett, SGC, and Card Ladder. 
+Inflection points that plausibly form today’s moat (mechanism-linked)
+First, PSA’s Set Registry (2001) converts grading from “quality label” into a status game with durable network
+effects: collectors compete on registry sets, increasing willingness to pay for grading and decreasing
+willingness to switch standards. 
+Second, guarantee + error-correction policy is not marketing fluff; PSA explicitly promises it will buy a card
+or refund grade-value differences if PSA later determines grade/authenticity issues under its standards.
+That converts the grade into an insurable economic claim. 
+Third, physical tamper evidence + database verification reduces fraud surface: PSA emphasizes sonic-weld
+tamper evidence and public cert verification pathways. 
+Fourth, pricing/turnaround tiers + backlog dynamics create a capacity moat: SEC filings explain that faster
+service commands higher fees and that a portion of cost of revenues is relatively fixed short-term, enabling
+operating leverage at high volumes—if trust survives. 
+Fifth, distribution integrations (eBay, dealer programs) spread the standard by embedding authentication
+into transaction defaults; PSA describes eBay checkout integration where PSA authenticates the card and
+verifies condition matches listing before grading. 
+A2) PSA success factors (micro + macro)
+19
+20
+21
+22
+23
+20
+24
+1
+25
+26
+27
+5
+
+=== Page 6 ===
+Micro/internal mechanisms
+Trust formation mechanics (why the market accepted PSA)
+PSA’s trust proposition is a bundle: (i) a standard, (ii) process controls, and (iii) financial responsibility. The
+FAQ makes two operationally critical claims: multi-rater review (“two or more… graders… must agree”) and
+economic accountability (buyback/refund policy). 
+That  combination  changes  market  behavior:  it  makes  “PSA  grade”  a  tradable  signal  and  gives
+counterparties a common language for sight-unseen trade.
+Network effects: registry + population report + adoption loops
+PSA’s  Population  Report  provides  public  supply  distribution  by  grade,  which  becomes  price  discovery
+infrastructure (scarcity + liquidity). 
+The Set Registry creates a structured competition that rewards grading participation and drives repeat
+submissions. 
+The loop is: more submissions → richer population data + more registry competition → greater perceived
+legitimacy of PSA grades → more marketplace quoting in PSA terms → more submissions.
+Pricing + capacity control: tiers/turnaround as demand throttle
+Collectors Universe filings are explicit: turnaround times requested affect revenue because the company
+“charge[s] higher fees for faster service times,” and higher ASP in a quarter came from customers paying for
+improved turnaround. 
+PSA’s public service-tier menu makes the same strategy legible to customers and enables continuous
+repricing to match volume to capacity. 
+Workflow/QA signals (what can be verified publicly)
+While PSA does not fully disclose internal SOPs, it does make verifiable claims about:
+- Certification verification via app/QR and cert lookup. 
+- Reholder workflow that includes authenticity checks on the holder and card before re-encapsulation,
+implying chain-of-custody thinking and anti-counterfeit measures even for the holder itself. 
+Failure modes and mitigations
+Backlog can destroy trust if it incentivizes corner-cutting. Collectors Universe disclosed a “record backlog” of
+card submissions as of Sept 30, 2020. 
+PSA’s control lever is pricing and service mix (charge more for speed), but the unsolved piece is that grading
+remains labor-intensive and thus exposed to training drift, fatigue, and incentive distortion. PSA’s multi-
+grader agreement rule is one mitigation, but HSA must design deeper auditability given higher claim
+severity for bags. 
+Macro/external mechanisms
+Market structure shift and why third-party standards become necessary
+Collectors Universe describes authentication/grading as facilitating sales because it provides “a high level of
+assurance as to the authenticity and quality” of items being bought/sold, linking demand for grading to
+transactional behavior. 
+This is the macro logic HSA must exploit: as Hermès resale transactions become increasingly remote and
+cross-border, third-party standards become a prerequisite to liquidity.
+1
+16
+18
+28
+29
+17
+18
+1
+18
+6
+
+=== Page 7 ===
+Fraud dynamics and psychology
+A credible standard is partly a coordination solution: it tells  both parties what evidence counts and how
+disputes are resolved. Where disputes are economically meaningful, the guarantee and dispute process
+matter as much as the initial authentication.
+Manufacturer relationship
+PSA has historically operated without manufacturer endorsement, and eBay explicitly states its authenticity
+services are not endorsed by brands. 
+For HSA, “not brand-endorsed” must be positioned as independence, not antagonism; but brand/IP risk is
+structurally higher in luxury (see legal posture later).
+A3) PSA unit economics & financial reality (SEC-grounded, then translated)
+SEC-extracted financials (Collectors Universe; FY ended June 30)
+All numbers are from Collectors Universe filings prior to privatization.
+Metric
+FY2020
+FY2019
+Source / label
+Net revenues
+$78.891M
+$68.449M
+Verified (SEC). 
+Cost of revenues
+$33.655M
+$28.694M
+Verified (SEC). 
+Gross profit
+$45.236M
+$39.755M
+Verified (SEC). 
+Gross margin
+~57.3%
+~58.1%
+Calculated from SEC values (verified inputs). 
+Operating income
+$14.102M
+$12.124M
+Verified (SEC). 
+Operating margin
+~17.9%
+~17.7%
+Calculated from SEC values (verified inputs). 
+Segment economics (why “grading” can be a high-margin labor business)
+Collectors Universe segment reporting shows both Coins and Trading Cards & Autographs produced ~27–
+29% segment operating income margin before “unallocated” expenses. 
+This implies the core grading operations have meaningful operating leverage once throughput is high and
+rework/claims stay bounded.
+Cost drivers (what actually eats COGS)
+Collectors Universe (10-Q) explicitly enumerates major cost of revenues for authentication/grading: labor,
+production costs, credit card fees, warranty expense, and occupancy/security/insurance. 
+This is the template for HSA’s cost model: labor is dominant; facility/security/insurance are meaningful fixed
+costs; warranty/guarantee is a tail-risk term that must be priced, not wished away.
+Pricing architecture as an economic throttle (important for HSA design)
+PSA’s public menus show multi-tier pricing with declared value/insured value and turnaround times, and the
+Reholder page explicitly warns PSA may adjust pricing/services/processing time to align demand with
+capacity. 
+Collectors Universe filings reinforce the causal mechanism: faster turnaround commands higher fees;
+30
+2
+2
+2
+2
+2
+2
+2
+18
+31
+7
+
+=== Page 8 ===
+vintage/higher-value items justify higher ASPs; and a portion of costs are fixed in the short term, so volume
+drives gross margin. 
+Indicative per-item economics (what is known vs unknown)
+PSA does not publicly disclose annual units graded or per-item labor minutes in SEC filings (Unknown).
+Therefore, any direct “COGS per card” number is an estimate and should not be treated as verified.
+What can be grounded: - Price per item by tier is public via PSA service pages. 
+- Cost categories are SEC-grounded. 
+- Therefore, HSA’s per-bag model (C3) should be built bottom-up, and compared to PSA’s achieved gross
+margins as a plausibility bound, not as a copy-paste assumption. 
+Part B — Pokémon card market vs Hermès bag market, plus
+comparables
+B1) Similarities/differences that matter for HSA (evidence-based where possible)
+Where PSA transfers cleanly (similarities)
+Third-party  certification  becomes  economically  valuable  when  it  enables  remote  trade  by  providing
+“assurance as to authenticity and quality” that facilitates buying/selling behavior. That is explicitly how
+Collectors Universe describes the driver of grading demand. 
+Hermès resale has the same structure: high price dispersion, asymmetric information, and high fraud
+payoff.
+Where Hermès breaks the PSA model (differences that force redesign)
+Repairability and “state changes” are endemic
+Unlike  cards  in  slabs,  bags  are  living  objects:  spa  treatments,  re-dyeing,  hardware  swaps,  strap
+replacement, and refurbishment can change both condition and authenticity evidence. Chinese reporting
+highlights a growing “旧包改造” (old bag modification) business, with shops accepting customer-provided
+bags and charging ~1000–3000 RMB depending on work; it also describes risks of “一眼假” outcomes and
+trademark issues. 
+Implication: HSA must grade originality state (original vs repaired vs modified) and define re-auth triggers.
+Luxury demand is value-preservation oriented (a driver of grading adoption)
+Tencent Marketing Insight × BCG’s 2024 report states China mainland consumers’ luxury spending is
+estimated at 5,720亿元 in 2024 (+4%), and notes categories with stronger value-preservation attributes (珠
+宝、皮具) leading growth. 
+Implication: Hermès buyers already reason in “value retention” terms—fertile ground for a credible grade
+signal if it is trusted.
+Secondhand/grey-market complexity raises authentication stakes
+A Reuters report describes China’s growing second-hand and grey luxury markets, including discounts on
+platforms like DeWu (Dewu/得物) and estimates the grey market at ~$57B annually, emphasizing price gaps
+18
+28
+18
+23
+18
+32
+33
+8
+
+=== Page 9 ===
+and consumer authenticity concerns. 
+Dewu’s own product descriptions emphasize “先鉴别，后发货” (authenticate first, then ship) and claim “多道
+鉴别查验工序,” evidencing consumer demand for process-based trust (self-reported; treat cautiously). 
+Standardizing “condition” is harder for bags than for cards
+Cards have a constrained feature set (centering, corners, surface, edges). Bags have multi-material, multi-
+component condition surfaces and repairs that can be cosmetically invisible but value-relevant. eBay’s
+authenticity guarantee materials acknowledge there are cases where the authenticator may verify condition
+matches listing but “may not be able to verify… authenticity,” and will communicate what could not be
+authenticated. 
+Implication: HSA must support an “inconclusive” state (and price it), and must make its grade claim precise.
+Evidence note (Chinese-language sources used in this section)
+- 腾讯营销洞察（TMI）× BCG《中国奢侈品市场洞察报告（2024）》 
+- 新华社转载北京商报《奢侈品旧包改造不止一眼假》 
+- 得物（得物App/应用商店说明）“先鉴别，后发货”相关描述 
+B2) What transfers from PSA to HSA, and what must change (with plans)
+Transferable components mapping (PSA mechanic → HSA analog → plan → risk/constraint)
+PSA mechanic
+HSA analog
+Implementation plan
+Risk / constraint
+Numeric grade
+as price
+language
+Hermès-condition
+grade + originality
+grade
+Publish rubric; train graders;
+require multi-rater
+agreement; build “grade
+notes” fields
+Condition subjectivity →
+disputes; requires reliability
+audits (must be measured)
+Multi-grader
+review
+Two-person
+grading + QC
+adjudication
+Mirror PSA claim: at least
+two graders must agree;
+third-party audit sample
+weekly
+Labor cost ↑; must prevent
+“rubber stamping” (audit)
+Financial
+guarantee +
+correction
+HSA financial
+guarantee tied to
+declared value
+Offer capped guarantee;
+reserve policy; explicit
+dispute workflow
+Tail risk severe (bag values
+high); guarantee must be
+priced and limited
+Tamper-
+evident trust
+artifact
+“Digital slab” seal
+kit + cryptographic
+NFC
+Use cryptographic NFC +
+tamper-evident attachment;
+bind to photo evidence
+Tag decoupling/transplant
+attack; UX constraints for
+luxury buyers
+Registry + cert
+verification
+Public certificate
+verification +
+evidence hash
+Cert lookup + NFC
+challenge–response
+verification endpoint
+Privacy + data exposure
+tradeoffs; must avoid leaking
+serials useful to
+counterfeiters
+34
+35
+36
+33
+32
+35
+9
+
+=== Page 10 ===
+PSA mechanic
+HSA analog
+Implementation plan
+Risk / constraint
+Population
+report
+HSA “bag census”
+Aggregate submissions by
+model/leather/year/region;
+anonymize
+Data quality; brand pressure;
+requires careful disclosure
+policies
+Non-transferable (must redesign) - Bags are repairable and modifiable. HSA must define state models
+(validity depends on custody and subsequent interventions). PSA can rely on slab integrity; HSA cannot.
+- Physical “slab” isn’t viable. A bag slab is socially unacceptable and impractical; instead, the “artifact” must
+be a minimal, non-damaging seal + digital record.
+- Claim severity is larger. A counterfeit graded “authentic” can be a $10k–$200k event; HSA must be more
+conservative than PSA in initial guarantee scope and must embrace “inconclusive.”
+Mandatory: PSA slab equivalent for bags (“Digital Slab” options and evaluation)
+Option set 1) Certificate-only (paper + QR) — Rejected. Certificate substitution and post-auth tampering
+are  trivial.  Certilogo  explicitly  warns  that  finding  a  code  online  or  via  photo  “does  not  guarantee”
+authenticity; you must have the product to check it. 
+2) Naïve NFC hangtag (static UID / static URL) — Rejected. Academic work notes NFC Forum lacks a tag
+authentication mechanism; in that absence, NFC tags cannot provide secure product identification, and
+cloning becomes central. 
+3) Cryptographic NFC + tamper-evident physical attachment (“Digital Slab” recommended) — Proposed
+HSA baseline. NXP describes AES-based SUN messages where each tap yields a unique message, verified by
+the backend host. 
+4) In-custody vault-only validity — Complement, not replacement. Works for marketplaces who can keep
+custody (akin to vault models), but HSA must also support out-of-custody verification if it wants to be a
+category standard (not just a warehouse standard).
+NFC / tagging requirements (deep, threat-modeled)
+Threat model (minimum set) - Tag cloning (copy identifier)
+- UID copying / emulation
+- Replay attacks (capture and replay a “valid” scan)
+- Certificate substitution (swap cert for a different authentic bag)
+- Tag removal/reattachment
+- Adhesive replacement (fake seal)
+- “Donor bag” tag transplant (move tag to counterfeit bag)
+- Backend API abuse (scrape cert IDs; brute-force verification endpoints)
+Why naïve NFC fails (plain English, source-backed) - NFC Forum tags can carry NDEF data but NFC Forum
+does not provide a native authentication mechanism; without cryptographic authentication, secure product
+identification is not achievable. 
+- Brands and authentication systems warn that codes seen online/photos are insufficient: a code can be
+copied, and verification must be tied to physical possession and secure checks. 
+Minimum viable secure design (HSA recommended baseline) - Use cryptographic NFC with challenge–
+response or tap-unique cryptographic message generation. NXP’s NTAG 424 DNA describes AES-128 SUN
+37
+9
+10
+9
+37
+10
+
+=== Page 11 ===
+message generation per tap, with host-side verification. 
+- Prefer tags that support  seal-break / tamper state. NXP describes “TagTamper” variants adding “seal-
+break detection.” 
+- Use  tamper loops (physical break detection). Avery Dennison’s “Tamper Loop” describes closed/open
+states and smartphone-checkable tamper status. 
+- Require server-side verification with rate limits and abuse monitoring; never treat locally read tag data as
+proof. (Design inference driven by SUN host-verification model.) 
+Key management and manufacturing assumptions (explicit) -  Per-tag keys: each tag has diversified
+secrets; compromise of one tag does not compromise fleet (estimate; required best practice).
+-  Provisioning: keys injected at manufacturing or in HSA secure facility; keys stored in HSM; audit logs
+immutable (estimate).
+-  Revocation/rotation:  backend  maintains  revocation  list;  tags  can  be  marked  “invalid”  if  suspected
+transplant or compromise (estimate).
+- If key leaks: revoke affected batch; rotate backend; force re-sealing for “green” status (estimate).
+UX and legitimacy constraints - Hermès buyers will reject anything that looks like a cheap hangtag. The
+seal must be discreet, non-damaging, and consistent with luxury aesthetics. (Unknown; must be tested with
+dealers/HNW buyers.)
+Validity  states  (critical  to  preventing  “post-auth  drift”) -  Certified-in-lab:  authenticity  +  grade
+determined; tag bound; evidence captured.
+- Sealed-in-custody: item held in HSA custody; strongest claim.
+- Verified-at-checkout: real-time NFC check during transaction; confirms tag + backend status = valid.
+-  Out-of-custody (time-bound): authenticity/grade reflect inspection time; after a time window or after
+certain  events,  verification  returns  “valid-at-date”  not  “currently  guaranteed.”  (Design  choice;  must  be
+explicit.)
+- Re-auth required after spa/repair, hardware replacement, dyeing, or seal damage.
+B3) Comparables & adjacent attempts (why hasn’t this become standardized already?)
+Below are seven comparables; each is analyzed only on authenticity + rating (not marketplace GMV).
+StockX (sneakers/streetwear/handbags) - Trust mechanism (promise language): “Verified by StockX” and
+not endorsed by brands; handbags must be brand new. 
+- Rating approach: largely binary gate (authentic + new condition), not a nuanced grade. 
+- Dispute workflow: Buyer Promise with a short claim window (10 days) and tag-intact requirement. 
+- Vulnerability/failure mode: legal and reputational exposure when fakes slip through; court order found
+liability for distributing counterfeit goods in the Nike case (37 total pairs). 
+- Lesson for HSA: if your claim is “verified authentic,” adversaries (and courts) will test it. HSA must design
+with conservative states (“inconclusive”) and tight chain-of-custody artifacts.
+GOAT (sneakers) - Trust mechanism: GOAT states products are “verified by a variety of means” including
+digital authentication, in-hand verification, and/or ML; crucially it acknowledges some products may be
+verified without physical examination. 
+- Rating approach: primarily authentication/condition-as-described, not a PSA-like grade (varies by product
+10
+38
+39
+40
+6
+41
+7
+8
+42
+11
+
+=== Page 12 ===
+class).
+- Scalability constraint: mixing non-physical verification can reduce cost but may weaken trust for high-value
+categories (HSA should avoid this for Hermès). 
+- Lesson: HSA should not dilute its core claim by allowing “digital-only” verification for Hermès; Hermès
+needs in-hand inspection + evidence capture.
+eBay  Authenticity  Guarantee  (handbags/watches/jewelry/cards) -  Trust  mechanism:  explicitly
+independent  from  and  not  endorsed  by  brands;  authenticators  verify  authenticity  and  that  condition
+matches listing. 
+- Rating approach: generally matching-to-listing vs publishing a universal condition grade; and eBay notes
+situations where authenticity cannot be verified but condition can. 
+- Monetization: bundled trust layer in marketplace; backed by eBay Money Back Guarantee depending on
+eligibility. 
+- Lesson: marketplace-layer authentication tends to collapse into a dispute process rather than becoming a
+canonical grade standard. HSA’s opportunity is to be category standard independent of any one marketplace.
+Entrupy  (device  +  AI;  luxury  authentication) -  Trust  mechanism:  collects  microscopic  images  and
+compares against a database containing “millions” of records from known authentic and counterfeit items
+(Entrupy description). 
+- Pricing: Hermès Premium priced at $119 per authentication (as listed). 
+- Guarantee scope: one-year financial guarantee to Entrupy’s direct customers; non-transferable. 
+- Vulnerability/failure mode: certificates are not transferable; this prevents standardization as a widely
+traded consumer-facing grade signal unless marketplaces integrate at the business level. 
+- Lesson: HSA should consider similar non-transferable guarantee constraints early, but must still create a
+transferable verification artifact (even if guarantee is limited to direct customers).
+Chrono24 Certified (watches) - Trust mechanism: certified watches checked by a verified watchmaker;
+positioned as the basis of an authenticity guarantee. 
+- Artifact: certificate of authenticity + authenticity guarantee. 
+- Lesson: watch market shows that third-party “verified” can scale when routed through professionals
+(watchmakers) and anchored in documented criteria; HSA needs similarly explicit criteria and professional-
+grade auditability.
+Certilogo (digital code verification for brands) - Trust mechanism: code-based authenticity check; but
+warns that finding a code online/photo does not guarantee authenticity — you must have the product. 
+-  Lesson:  codes  alone  are  not  chain-of-custody.  HSA  must  design  against  code  reuse  and  certificate
+substitution.
+China-specific: 得物 (Dewu/Poizon) - Trust mechanism: “鉴别服务” and “先鉴别，后发货,” multi-step checks;
+app-store description claims platform has authenticated “超4000万件” items (self-reported). 
+- Rating approach: primarily authenticity and defect screening, not a universal grade signal transferable
+across the ecosystem.
+- Lesson: China demonstrates massive demand for process-based trust, but also shows that platform-native
+authentication doesn’t automatically become an independent standard. HSA can become the cross-market
+“PSA-like” layer for Hermès if it publishes a stable grading language and verification rail.
+42
+43
+36
+44
+45
+5
+46
+46
+47
+48
+37
+35
+12
+
+=== Page 13 ===
+Mandatory: PSA vs StockX vs HSA (authenticity + rating only)
+Dimension
+PSA
+StockX
+HSA (proposed)
+Object type +
+environment
+Cards/items
+encapsulated; lab
+grading; slab is long-
+lived
+Marketplace
+intermediary; focuses on
+“new” condition for
+handbags
+Hermès bags; lab
+inspection + evidence
+capture + seal kit
+Authentication
+claim
+PSA guarantees grading/
+auth under its standards;
+buyback/refund if grade/
+auth issue later
+determined
+“Verified by StockX” (not
+brand-endorsed); Buyer
+Promise dispute process
+“Independent expert
+opinion” with explicit
+validity states;
+conservative
+“inconclusive” option
+Rating/grade
+signal
+Numeric 1–10 grading
+standard; qualifiers/no-
+grade taxonomy
+Mostly binary gate:
+authentic + new
+condition
+Dual signal: authenticity
+verdict + condition grade
++ originality state
+Trust artifact
+PSA holder (tamper-
+evident), cert number,
+public cert verification
+StockX tag + platform
+records; claim requires
+tag attached
+“Digital Slab”: tamper-
+evident loop +
+cryptographic NFC; public
+cert verification +
+evidence hashes
+Liability/
+guarantee
+scope
+Buyback/refund
+difference in value under
+stated conditions (PSA
+Financial Guarantee) 
+Buyer Promise (refund/
+replace if incorrect); strict
+claim timing/conditions 
+Capped guarantee tied to
+declared value; reserve
+pricing; structured
+dispute flow (estimate)
+Incentives /
+conflicts
+Revenue from
+submissions; risk is
+grade inflation;
+mitigated by policy +
+reputation
+Revenue from transaction
+fees; conflict: approve =
+higher conversion; court-
+tested risk (Nike case) 
+Must separate grading
+comp from transaction
+outcomes; ban pay-per-
+pass incentives (design
+requirement)
+Scaling
+bottleneck
+Labor + QA; backlog risk
+documented
+Authentication labor +
+logistics; dispute load
+Labor + training +
+evidence capture +
+secure tag ops;
+guarantee tail risk
+Network effects
+source
+Registry + population
+report + marketplace
+quoting in PSA grades 
+Two-sided marketplace
+liquidity + pricing graph
+Cross-market API rail +
+dealer adoption + “bag
+census” + standardized
+grade language
+Key implications for HSA design
+HSA must behave more like PSA than StockX: the defensible moat is the grade language + verification
+registry + financial accountability. But unlike PSA, HSA must explicitly model post-certification state changes
+1
+49
+8
+50
+13
+
+=== Page 14 ===
+and incorporate cryptographic tag security; otherwise it will become a “certificate vendor” rather than a
+standard.
+Part C — Proposal: what needs to be done
+C1) Product + service lineup (MVP → platform; 3–5 tiers, trust-first)
+Tier 1: HSA Authenticate (A) — in-hand authenticity verdict - Customer receives: digital certificate +
+public verification page; high-resolution evidence set (select views), no physical tag (optional add-on).
+-  Trust  claim  language:  “Independent  third-party  opinion;  not  affiliated  with  or  endorsed  by
+Hermès.” (Benchmark: eBay explicitly says its authenticity services are not endorsed by any brands sold on
+eBay.) 
+-  Workflow:  intake  → standardized  photo/evidence  capture  → primary  authenticator  → secondary
+authenticator → adjudication if disagreement → cert issued (pass / fail / inconclusive).
+- Guarantee: limited guarantee only for direct submitter; caps based on declared value (design inspired by
+Entrupy’s direct-customer, time-bounded guarantee — but HSA should choose its own terms). 
+- Pricing: $250–$450 (estimate; depends on model/value/turnaround).
+- API rail: verification endpoint returns cert validity + status (valid / revoked / expired / reauth-required).
+Tier 2: HSA Grade + Report (A+G) — authenticity + condition grade + originality state - Customer
+receives: digital certificate + structured grading report (condition sub-scores) + public verification page.
+- Trust claim: condition grade is a standardized rubric; authenticity is opinion at time of inspection; post-
+inspection changes can invalidate grade.
+- Workflow additions: condition grading rubric + originality assessment (“Original / Repaired / Modified /
+Unknown”).
+- Dispute process: formal appeals window; re-review by senior adjudicator; publish SLA.
+- Pricing: $550–$850 (estimate; see C3).
+Tier 3: HSA Digital Slab Seal (A+G+S) — cryptographic NFC + tamper-evident seal kit - Customer
+receives: (i) physical seal kit attached to bag (non-damaging), (ii) cryptographic NFC tag bound to certificate,
+(iii) verification UX (“tap to verify”).
+- Security design: AES-based tap-unique message tags (e.g., NTAG 424 DNA class design) with backend
+verification; optional TagTamper or tamper-loop hardware. 
+- Validity state model: “sealed-in-custody” vs “out-of-custody,” with reauth triggers explicitly enumerated.
+Tier 4: HSA Vault-Custody Certification (A+G+S+CoC) - Customer receives: everything above + custody
+state (“in vault”) with stronger guarantee language because the item cannot be altered without detection.
+- Analog: PSA Vault terms underscore inspection/reporting deadlines; vault models enable stronger claims
+because custody is controlled. 
+- Monetization: storage fee + verification fees; platform partners get higher-confidence inventory.
+Tier 5: HSA Re-Verification (ReAuth / Post-Spa) - Designed for events that break validity: spa/repair, seal
+damage, ownership transfer.
+- Analog: PSA Reholder authenticates holder/card before reholdering and warns that cracked holders
+30
+46
+51
+52
+14
+
+=== Page 15 ===
+trigger raw examination to ensure original grade/auth still valid. 
+- HSA must treat any seal break as requiring re-verification.
+C2) 12–18 month rollout plan
+MVP scope (first 90 days):
+Ship Tier 1 + Tier 2 with a narrow Hermès subset (e.g., Birkin/Kelly/Constance in common leathers, exclude
+exotic initially) and do not ship a seal/tag until the grading rubric stabilizes (to avoid scaling a flawed artifact).
+This is consistent with the “trust-first, artifact-second” principle implied by NFC security literature: without
+strong authentication design, tags are not secure identifiers. 
+Operational  ramp  (months  3–12): -  Build  lab  SOP:  intake  imaging  stations;  controlled  lighting;
+measurement tools; hardware/engraving validation; materials reference library.
+- Hiring: target ex-resale authenticators, luxury repair specialists, leather/hardware experts; define training
+curriculum and certification tests.
+- QA cadence: weekly blind regrades; monthly external audit panel; publish inter-rater reliability metrics
+internally.
+Data flywheel (months 1–18): - Ground truth creation: acquire authentic exemplars and known counterfeit
+exemplars (legally) for training/reference.
+- Evidence schema: require consistent photo angles + macro shots of stamps/hardware/stitching; ensure
+evidence is good enough to support disputes.
+- Counterfeit library: versioned; tag patterns; known failure patterns.
+Quarterly KPIs (trust-centric) - Throughput/day/authenticator; turnaround time distribution; rework rate;
+appeal rate; dispute rate; reserve utilization; partner adoption (listings using HSA grade language); API
+verification calls; percent of verifications returning “valid & sealed” vs “valid-at-date.”
+C3) Unit economics & capacity model (explicit assumptions; sensitivity)
+Bottom-up time model (per bag; Tier 2 Grade + Report baseline)
+(All Estimated; must be measured with time studies in pilot.)
+Step
+Minutes
+(E)
+Role (E)
+Notes
+Intake + chain-of-custody logging
+10
+Ops
+barcode, weigh, photo of
+packaging
+Standardized photography (macro +
+full)
+20
+Tech
+critical for disputes
+Authenticity exam (primary)
+35
+Authenticator
+stamp/hardware/material logic
+Authenticity exam (secondary)
+25
+Authenticator
+independent second look
+17
+53
+15
+
+=== Page 16 ===
+Step
+Minutes
+(E)
+Role (E)
+Notes
+Condition grading + sub-score entry
+25
+Senior grader
+rubric-based
+Adjudication (only if disagreement)
+0–20
+Lead
+assume 15% of cases
+Final QC + cert issuance
+10
+QC
+formatting + sanity check
+Packaging/return
+10
+Ops
+Expected labor minutes: ~135 minutes per bag (E), plus adjudication tail.
+Wage + overhead assumptions (illustrative) - Authenticator fully loaded:  $40–$70/hr (E; geography-
+sensitive)
+- Ops/QC fully loaded: $22–$35/hr (E)
+- Facility/security/insurance allocation: $25–$60/bag (E; volume-sensitive)
+- Dispute reserve: $10–$40/bag (E; must be calibrated from observed loss)
+Illustrative cost per bag (Tier 2 A+G) - Labor: ~2.25 hrs blended at ~$45/hr = $101 (E)
+- Overhead allocation: $40 (E)
+- Materials (no seal): $5–$15 (E)
+- Reserve: $20 (E)
+Total COGS estimate: ~$166–$220/bag (E)
+Tier 3 with “Digital Slab” seal kit (A+G+S) Add: - Secure tag + tamper loop + packaging: $10–$35/bag (E;
+depends on chip + assembly)
+- Extra labor for attachment + verification: 10–15 min (E)
+Total COGS estimate: ~$190–$320/bag (E)
+Pricing required for target gross margin (sensitivity) - If COGS = $220 and target GM = 60%, price ≈
+$550.
+- If COGS = $320 and target GM = 60%, price ≈ $800.
+(These are mechanistically consistent with PSA’s demonstrated ~57% FY2020 gross margin ceiling as an
+analog, but HSA has higher liability severity; therefore HSA should target higher dollar contribution per
+unit than PSA. 
+)
+Break-even volume (single hub; estimate) Assume fixed costs (rent, security, management, tooling,
+software, compliance) $150k–$350k/month (E).
+If contribution margin per bag is $350 (price $650 – COGS $300), break-even is ~430–1,000 bags/month (E).
+This is directionally consistent with draft claims of ~800/month, but HSA must validate with actual time
+studies and wage geography. (Drafts cited in appendix.) filecite turn0file1  filecite turn0file0  
+Fraud/chargeback/dispute  reserve  logic  (how  to  compute,  not  guess) Reserve  per  bag  should  be
+computed as:
+Reserve = P(false negative) × E(loss severity | false negative) + P(dispute) × E(cost per dispute)
+Where loss severity is bounded by declared value caps and policy language (see legal posture).
+23
+16
+
+=== Page 17 ===
+C4) Growth trajectory + exit scenarios (trust-standard adoption, not GMV)
+3–5 year trajectory (trust milestones) - Year 1: establish rubric + reliability; 2–3 dealer partners; ship Tier
+1–2; demonstrate low dispute/loss ratio.
+- Year 2: ship Tier 3 (secure seal kit) once attack-tested; integrate verification API with 2–3 resale platforms;
+publish “bag census” aggregates.
+- Year 3: expand to broader luxury categories (selectively) or deepen Hermès moat via richer authenticity
+corpus; begin vault-custody tier at scale.
+- Years 4–5: become de facto standard in Hermès resale listings for top dealers; attach rate to verification
+API increases; insurance partnerships feasible if loss ratio stable.
+Exit pathways - Strategic: large resale platforms (seeking independent standard), luxury-adjacent trust
+infra, insurers/underwriters interested in authenticated inventories, or authentication incumbents (device +
+data consolidation, e.g., Entrupy-like players).
+-  Roll-up  logic:  combine  with  repair/spa  networks  only  if  chain-of-custody  and  independence  can  be
+preserved (avoid conflicts).
+- IPO plausibility: only if HSA becomes multi-category standard with stable loss ratio and high-margin
+recurring rails (verification API + custody services).
+Exit-ready  milestones -  Documented  inter-rater  reliability;  controlled  loss  ratio;  audited  tag  security;
+platform integrations where HSA verification becomes default checkout behavior (analog: PSA + eBay
+integration). 
+Adversarial threat model, risk register, falsifiable hypotheses
+Adversarial threat model (bags; minimum 12 vectors, with controls)
+This table is intentionally operator-centric (what we do, how it can fail).
+Fraud vector
+Control(s)
+Detection method
+Residual risk
+Component
+swapping (hardware/
+lock/feet)
+Originality grading + part-level
+inspection; photo corpus
+Macro + weight +
+hardware markings
+Medium (high-
+quality swaps)
+Hardware
+replacement (after
+auth)
+Seal kit on attachment points;
+reauth trigger after seal break
+NFC status + physical
+loop/tamper
+evidence
+Medium
+Stamp manipulation
+Multi-angle macro imaging;
+stamp logic rules
+Expert review +
+anomaly flags
+Medium-high
+Receipt/box/dustbag
+laundering
+Do not treat accessories as
+authenticity proof; optional
+accessory grading
+Accessory
+authenticity separate
+from bag
+Medium
+54
+17
+
+=== Page 18 ===
+Fraud vector
+Control(s)
+Detection method
+Residual risk
+Certificate
+substitution
+Cryptographically bind cert ↔
+tag ↔ evidence set; public
+verification
+Verification endpoint
+mismatch blocks
+Low if crypto +
+backend correct
+Tag cloning
+Cryptographic NFC (tap-unique
+message)
+Backend challenge
+verification
+Low if keys
+protected 
+Tag transplant
+(“donor bag”)
+Tamper-evident loop +
+destructive attachment; “seal
+broken” state
+Tamper loop open
+state + invalidation
+Medium (must
+be well-
+designed) 
+Adhesive
+replacement
+Avoid adhesive-only as primary
+security
+Seal design is
+mechanical + tamper
+loop
+Low-medium
+Repair/spa
+obfuscation
+Originality state taxonomy;
+mandatory disclosure; reauth
+required
+Evidence comparison
+at reauth
+Medium
+Odor concealment
+(smoke/mold)
+Standard sensory check + UV +
+documentation
+Condition sub-score
++ notes
+Medium
+Leather re-dye /
+recolor
+UV + microscopy where needed;
+rubric flags
+Condition/originality
+classification
+Medium-high
+“Return fraud” (swap
+after authenticity)
+Seal required for refunds;
+custody logs
+Tag status + evidence
+at intake
+Medium
+Shipping intercept /
+swap in transit
+Tamper-evident inbound
+packaging; chain-of-custody
+logging
+Package photo +
+weight variance
+Medium
+Counterfeit designed
+to pass HSA rubric
+Red-team updates; frequent
+reference library updates
+Drift monitoring;
+known-fake
+regression tests
+Always non-zero
+Risk register (minimum 10 obstacles; severity, mitigation, early warning, kill criteria)
+Obstacle
+Severity
+Mitigation
+Early warning
+Kill criteria
+Brand/IP litigation
+(injunction risk)
+High
+Conservative claims;
+nominative fair use
+hygiene; avoid implying
+affiliation
+C&D letters;
+platform partner
+anxiety
+Counsel rates
+existential risk
+“high”
+Grade
+inconsistency (no
+standard forms)
+High
+Training + multi-rater +
+audits; publish rubric
+Appeals spike;
+partner
+complaints
+<75% within ±1
+notch at 60 days
+40
+55
+18
+
+=== Page 19 ===
+Obstacle
+Severity
+Mitigation
+Early warning
+Kill criteria
+Guarantee tail loss
+blows up
+High
+Cap by declared value;
+reserve; conservative
+“inconclusive”
+Reserve burn
+>1% declared
+value
+Loss ratio >1%
+declared value in
+pilot
+Tag decoupling
+discovered (public
+exploit)
+High
+Cryptographic NFC +
+tamper loop; bounty
+program
+Exploit reports;
+mismatch
+incidents
+Any confirmed
+exploit yields
+“valid”
+Talent scarcity
+(true experts)
+Medium
+Apprentice pipeline;
+compensation; SOP
+encoding
+Throughput
+stalls; quality drift
+Cannot staff to
+run-rate by
+month 4
+Counterfeit
+adaptation
+Medium
+Red team; counterfeit
+library; continuous
+updates
+Rising
+inconclusive/false
+negatives
+Seeded test fail
+(≥1 miss)
+Regulatory
+consumer-
+protection action
+Medium
+Clear disclaimers; fair
+dispute handling;
+documented processes
+Complaint
+volume;
+regulator inquiry
+Mandatory
+changes destroy
+economics
+Partner adoption
+fails (no
+distribution)
+High
+Dealer program;
+integration; ROI tests
+<3 serious LOIs in
+60 days
+No measurable
+premium in A/B
+test
+Data leak (cert
+scraping)
+Medium
+Rate limits; tokenized
+verification; abuse
+monitoring
+Suspicious API
+traffic
+Persistent abuse
+unmitigated
+Reputational
+scandal (one big
+miss)
+High
+Conservative cert states;
+incident response
+Viral counterfeit
+incident
+Standard
+collapses
+(partners
+abandon)
+Falsifiable hypotheses (minimum 8; each with sample size, metric, threshold, time window)
+1) H1: Hermès dealers will pay for a condition grade, not just authenticity.
+Sample: n=20 dealers; Test: pricing survey + signed LOIs; Pass: ≥8 commit to list HSA grade in listings
+within 60 days; Fail: <4.
+2) H2: HSA grade increases liquidity/price.
+Sample: n=200 listings A/B; Metric: conversion rate or net realized price; Pass: ≥10% higher conversion or
+≥5% higher price; Window: 60 days.
+3) H3: Inter-rater reliability is achievable at PSA-like levels.
+Sample: n=120 graded bags; Metric: agreement rates; Pass: ≥85% within ±1 notch; Window: 45 days.
+4) H4: HSA can keep false negatives below existential thresholds.
+Sample: n=40 seeded counterfeits; Metric: counterfeit passes as authentic; Pass: 0; Window: 30 days.
+19
+
+=== Page 20 ===
+5) H5: Secure tag system resists practical attacks.
+Sample: n=30 tags; Attack: clone/replay/transplant; Pass: 0 successful validations; Window: 30 days.
+6) H6: Dispute process can be fast enough to preserve trust.
+Sample: ≥30 real disputes or simulated; Metric: median resolution time; Pass: ≤10 business days; Window:
+60 days.
+7) H7: “Inconclusive” state reduces loss ratio without killing adoption.
+Sample: n=300 submissions; Metric: loss ratio + customer satisfaction; Pass: loss ratio ≤0.5% declared value
+and NPS ≥30; Window: 90 days.
+8) H8: API verification rail will be used by platforms if SLA is reliable.
+Sample: n=3 platform partners; Metric: verification calls/day + uptime; Pass: ≥10k calls/month and ≥99.9%
+uptime for 30 days; Window: 60 days.
+Minimum legal/claims posture
+Not legal advice. Operating posture + benchmark language (official sources).
+Core  posture  (“independent  opinion,”  not  brand-endorsed) -  Benchmark:  eBay  states  Authenticity
+Guarantee “is not affiliated with or endorsed by any of the brands sold on eBay.” 
+- Benchmark: StockX emphasizes “Verified by StockX” and “not endorsed by any brands.” 
+HSA should adopt similar language prominently and consistently, including in the verification UI.
+Define  exactly  what  is  being  promised HSA  must  separate:  1)  Authentication  opinion at  time  of
+inspection
+2) Condition/originality grade at time of inspection
+3) Seal validity state (in-custody vs out-of-custody)
+4) Guarantee scope (who is covered, for how long, and what events void it)
+This is not theory: StockX’s Buyer Promise ties claims to time limits and the presence of an attached tag,
+effectively conditioning the promise on chain-of-custody artifacts. 
+Entrupy similarly limits its guarantee: valid to direct customers for one year and not transferable. 
+Why brand/IP risk is real in resale Litigation in resale often contests marketing language and implied
+affiliation;  courts  scrutinize  representations.  The  Chanel  v.  WGACA  litigation  (publicly  reported)  shows
+brands pursue claims including false advertising and trademark issues; such cases raise the bar for how
+resellers/authenticators talk about brands. 
+HSA must assume Hermès could test boundaries similarly.
+Practical HSA claims guidelines - Avoid “Hermès-certified” or any suggestion of partnership.
+- Avoid unqualified “100% authentic” claims. Courts and plaintiffs will frame such language as a guarantee
+that can be falsified (as discussed in Nike v StockX context, where “100% Verified Authentic” language was at
+issue). 
+- Use structured, testable language: “HSA Certified Authentic (in-hand, multi-review, evidence archived).”
+30
+56
+7
+46
+57
+58
+20
+
+=== Page 21 ===
+- Provide clear consumer remedy + SLA; align with consumer protection expectations (refund/repurchase
+mechanics, clear timelines).
+Appendix — Phase 0 critique of the three drafts, plus “IC message”
+and final falsification checklist
+Phase 0 — Read and critique the 3 drafts (mandatory)
+Draft references (attachments) - Draft A: “HSA Investment Memo_ Building the PSA of Hermès Bags”
+filecite turn0file2
+- Draft B: “Gemini 1” filecite turn0file1
+- Draft C: “gemini 2” filecite turn0file0  
+Draft-to-Requirement Coverage Matrix
+Requirement
+section
+Draft A
+coverage /
+quality
+Draft B
+coverage /
+quality
+Draft C
+coverage /
+quality
+What is missing or wrong
+(summary)
+PSA case study
+(history,
+mechanisms)
+Med / Med
+Med / Low
+Med / Low
+Lacked SEC-grounded mechanism
+detail; did not extract cost drivers
+correctly; insufficient linkage
+between backlog/tiers and
+economics (fixed vs variable).
+PSA unit
+economics from
+SEC
+Med / Low
+Low / Low
+Low / Low
+Used headline margins without
+fully grounding cost components;
+per-item economics often asserted
+without SEC support. Corrected in
+report via SEC 10-K/10-Q. 
+StockX promise
+language +
+rating approach
+Med / Med
+Low / Low
+Low / Low
+Drafts did not quote exact
+constraints (10-day window; tag
+must remain attached; “new only”
+for handbags). Corrected with
+StockX help pages and Buyer
+Promise. 
+NFC/secure
+tagging threat
+model
+Low / Low
+Low / Low
+Med / Low
+Drafts mentioned NFC but did not
+threat-model cloning/replay/
+transplant or key management.
+Corrected with NFC security
+literature + NXP SUN architecture +
+tamper loops. 
+23
+59
+60
+21
+
+=== Page 22 ===
+Requirement
+section
+Draft A
+coverage /
+quality
+Draft B
+coverage /
+quality
+Draft C
+coverage /
+quality
+What is missing or wrong
+(summary)
+China: credible
+Chinese-
+language
+evidence
+Low / Low
+Low / Low
+Low / Low
+Lacked credible Chinese-language
+sources and regulatory context;
+added Tencent×BCG report, Xinhua
+reporting, and Dewu platform
+descriptions + Reuters context. 
+Rating rubric
+design +
+auditability
+Med / Low
+Med / Low
+Med / Low
+Drafts proposed grades but did not
+design inter-rater reliability
+systems, audit loops, or spa/repair
+taxonomy. Rebuilt in Part B/C +
+hypotheses.
+Legal posture
+Med / Low
+Low / Low
+Low / Low
+Drafts referenced IP risk but did
+not benchmark exact disclaimer
+language. Corrected with eBay/
+StockX official disclaimers and
+court-tested context. 
+Falsification tests
+Med / Med
+Med / Low
+Med / Low
+Drafts had checklists but not
+always with sample sizes and pass/
+fail. Rebuilt with explicit thresholds
+(Exec + Threat/Hypotheses).
+Error Log and “Questionable Claims” Register
+Below are the most material questionable claims from the drafts, with disposition. (Not exhaustive of every
+minor number; exhaustive focus is on decision-grade claims.)
+Draft claim (paraphrased)
+Why questionable
+Fix approach
+“PSA 65M+ items certified”
+PSA’s current homepage markets
+“Over 80 Million Collectibles
+Authenticated & Graded,”
+suggesting draft number is stale/
+outdated. 
+Fix by primary source: use
+PSA homepage as current
+claim; label SEC-era counts as
+historical. 
+“PSA graded ~19.26M items
+in 2025; ~72% share” (via
+GemRate/CLLCT)
+Not primary; relies on secondary
+tracking and could be biased/partial
+Reframe as estimate or
+remove from core IC thesis
+unless validated with primary
+datasets.
+61
+62
+63
+64
+22
+
+=== Page 23 ===
+Draft claim (paraphrased)
+Why questionable
+Fix approach
+“FY2020 trading card
+grading fees averaged
+$10.27/card; ranged $1–
+$5,000”
+Not supported by SEC filings; PSA
+current tier prices are materially
+higher than $10, and historical
+averages aren’t disclosed in SEC
+filings
+Remove as “verified”; treat
+pricing via PSA published
+service tiers as primary. 
+“Expected guarantee loss
+~0.18% of declared value”
+An assumption, not fact; depends on
+counterfeit base rate and loss
+severity
+Reframe as estimate with
+sensitivity; require pilot loss-
+ratio test (see falsification).
+“Breakeven ~800 bags/
+month”
+Unsupported without transparent
+labor minutes + wage + fixed cost
+model
+Fix by explicit capacity
+model (C3) and treat as
+estimate with sensitivity.
+Generic “NFC tag”
+recommendations
+Fails to explain why static identifiers
+can be cloned/replayed; no key
+management; no state model
+Fix by primary security
+architecture: cryptographic
+NFC SUN + tamper loop +
+backend verification. 
+StockX “trust” described
+without exact promise
+constraints
+Promise is conditional (10-day claim
+window; tag attached); also court-
+tested fakes issue is central
+Fix by official language +
+court order. 
+China market points without
+reputable Chinese-language
+sourcing
+Violates source hygiene; requires
+Chinese-language evidence
+Fix by Chinese-language
+reports + official platform
+language (see Part B). 
+Missing-Insight Map (what the drafts failed to do)
+PSA economics (SEC-level causal drivers): drafts didn’t clearly tie margins to cost categories (labor,
+occupancy/security/insurance, warranty) and demand throttles (turnaround pricing). Corrected using
+Collectors Universe SEC disclosures. 
+StockX exact claim language + controversy impact: drafts underweighted how the court record
+(Nike v StockX) functions as an external falsification of “verification” narratives. Corrected with the
+Mar 4, 2025 order and StockX’s own statement. 
+NFC/tamper-evident threat model: drafts treated NFC as a feature, not an adversarial system.
+Corrected using NFC authentication literature + NXP SUN architecture + tamper loops. 
+China-specific ecosystem and consumer protection context: drafts lacked reputable Chinese-
+language sources; corrected with Tencent×BCG report, Xinhua reporting on bag modification
+markets, and Dewu’s “authenticate-first” process descriptions (self-reported). 
+Rating rubric auditability + spa/repair handling: drafts proposed “grades” without building
+reliability measurement and re-auth triggers. Corrected with explicit reliability tests, state models,
+and product tiers.
+65
+60
+66
+67
+• 
+26
+• 
+68
+• 
+60
+• 
+67
+• 
+23
+
+=== Page 24 ===
+Primary-source link pack (direct links; accessed 2026-01-27 Asia/Taipei)
+(Per instruction: URLs are provided in code format. Access date for all: 2026-01-27.)
+SEC (Collectors Universe) FY2020 10-K:
+https://www.sec.gov/Archives/edgar/data/1089143/000149315220016754/form10-k.htm
+SEC (Collectors Universe) FY2021 Q1 10-Q (revenue recognition, cost drivers, 
+backlog):
+https://www.sec.gov/Archives/edgar/data/1089143/000149315220020321/form10-q.htm
+PSA Pricing (grading service levels):
+https://www.psacard.com/services/tradingcardgrading
+PSA FAQ (financial guarantee summary; multi-grader agreement; regrades; no-grade 
+taxonomy):
+https://www.psacard.com/support/faq
+PSA Security buyer guide (tamper evidence / sonic weld):
+https://www.psacard.com/services/psasecurityabuyersguide
+PSA Population Report:
+https://www.psacard.com/pop
+PSA Set Registry history:
+https://www.psacard.com/articles/articleview/9374/the-history-of-the-psa-set-
+registry
+StockX Our Process (not brand-endorsed; handbags new-only language):
+https://stockx.com/about/our-process
+StockX Buyer Promise:
+https://stockx.com/help/articles/StockX-Buyer-Promise
+Court order (Nike v StockX; Mar 4 2025 order text republished):
+https://www.casemine.com/judgement/us/67c924d52016e547bca7c749
+Entrupy Hermes pricing:
+https://www.entrupy.com/hermes-pricing/
+Entrupy Luxury Financial Guarantee (non-transferable; 1-year):
+https://www.entrupy.com/guarantee/luxury/
+Entrupy How-to-Use (microscopy + ML; millions of records):
+https://www.entrupy.com/how-to-use/
+NXP NTAG 424 DNA datasheet (SUN; AES-128; host verification):
+24
+
+=== Page 25 ===
+https://www.nxp.com/docs/en/data-sheet/NT4H2421Gx.pdf
+NXP Application Note AN12196 (Secure Dynamic Messaging):
+https://www.nxp.com/docs/en/application-note/AN12196.pdf
+Avery Dennison Tamper Loop (digital seal):
+https://rfid.averydennison.com/en/home/product-finder/circus-tamper-loop.html
+Academic paper (NFC tag authentication limitations; cloning concerns):
+https://pure.royalholloway.ac.uk/ws/files/23032289/
+Off_Line_NFC_Tag_Authentication.pdf
+Dewu (得物) official site and Apple App Store description (authenticate-first 
+workflow; self-reported volume):
+https://www.dewu.com/
+https://apps.apple.com/tw/app/%E5%BE%97%E7%89%A9-
+%E5%BE%97%E5%88%B0%E7%BE%8E%E5%A5%BD%E4%BA%8B%E7%89%A9/id1012871328?l=en
+Tencent Marketing Insight × BCG luxury report (Chinese PDF):
+https://bbx-pic.gtimg.com/bbx/pictures/2024/48_20240906150809_485299.pdf
+Xinhua / Beijing Business Daily (bag modification market; Chinese):
+https://www.news.cn/fashion/20230519/9fe7e42e3e084182a414c13f907ecb8e/c.html
+Collectors Universe take-private press release (GlobeNewswire):
+https://www.globenewswire.com/news-release/2020/11/30/2136654/0/en/Collectors-
+Universe-to-be-Acquired-by-Investor-Group-Led-by-Entrepreneur-and-Collector-Nat-
+Turner-for-Approximately-700-Million.html
+Acquisition completion (Business Wire):
+https://www.businesswire.com/news/home/20210222005284/en/Investor-Group-Led-by-
+Nat-Turner-Completes-Acquisition-of-Collectors-Universe
+What we would tell the IC (tight)
+HSA is viable only if we treat it as a trust infrastructure company with a cryptographically bound “digital slab”
+and a defensible grading standard—not as a marketplace feature. PSA’s success is not magic; it’s the
+repeated execution of multi-rater grading, a tamper-evident artifact, public verification rails, and financial
+accountability that the market can price into transactions. 
+Hermès is harder than cards because bags change state (spa/repair/parts). That means HSA must introduce
+validity states and re-auth triggers, and its seal system must resist cloning/replay/transplant. NFC done
+naïvely fails; cryptographic NFC + tamper loops + backend verification is table stakes. 
+We proceed because (a) unit economics for trust services can be excellent (PSA scale shows this), 
+ and
+(b) China and global resale behavior shows escalating demand for “authenticate-first” workflows, but no
+69
+60
+2
+25
+
+=== Page 26 ===
+cross-market Hermès grading standard exists yet. 
+We kill the project fast if reliability, tag security, or loss ratio fails the falsification checklist.
+Falsification checklist (repeat)
+Inter-rater reliability: n=120; ≥85% within ±1 notch; fail <75%. 
+Seeded counterfeit test: n=40; 0 pass as authentic; fail ≥1. 
+Tag attack test: n=30; 0 successful clone/replay/transplant validations; fail ≥1. 
+Cert↔bag binding audit: n=200; ≥99.5% correct identity/state; fail systemic mismatch. 
+Dispute SLA: ≥90% resolved ≤10 business days; fail median >15. 
+Dealer adoption: ≥6 LOIs to list HSA grades; fail <3. 
+Price premium/liquidity: n=200 A/B; ≥10% conversion or ≥5% price; fail no effect. 
+Loss ratio ceiling: ≤0.5% of declared value in pilot; fail >1.0%. 
+Throughput: ≥6 graded bags/authenticator/day by week 8; fail <4. 
+Brand/IP posture: no existential legal threat in first 60 days; fail if injunction risk becomes likely. 
+70
+1. 
+2. 
+3. 
+4. 
+5. 
+6. 
+7. 
+8. 
+9. 
+10. 
+26
+
+=== Page 27 ===
+https://www.psacard.com/support/faq
+https://www.psacard.com/support/faq
+sec.gov
+https://www.sec.gov/Archives/edgar/data/1089143/000149315220016754/form10-k.htm
+https://www.sec.gov/Archives/edgar/data/1089143/000149315220020321/form10-q.htm
+https://www.sec.gov/Archives/edgar/data/1089143/000149315220020321/form10-q.htm
+PSA Estimated Turnaround Time Updates
+https://www.psacard.com/info/submission-updates?utm_source=chatgpt.com
+https://www.entrupy.com/hermes-pricing/
+https://www.entrupy.com/hermes-pricing/
+https://stockx.com/about/our-process/
+https://stockx.com/about/our-process/
+https://stockx.com/help/articles/what-is-the-stockx-buyer-promise/
+https://stockx.com/help/articles/what-is-the-stockx-buyer-promise/
+https://www.casemine.com/judgement/us/67c924d52016e547bca7c749
+https://www.casemine.com/judgement/us/67c924d52016e547bca7c749
+https://pure.royalholloway.ac.uk/ws/files/23032289/Off_Line_NFC_Tag_Authentication.pdf
+https://pure.royalholloway.ac.uk/ws/files/23032289/Off_Line_NFC_Tag_Authentication.pdf
+https://www.nxp.com/docs/en/data-sheet/NT4H2421Gx.pdf
+https://www.nxp.com/docs/en/data-sheet/NT4H2421Gx.pdf
+https://pages.ebay.co.uk/authenticity-guarantee-watches-seller/terms/
+https://pages.ebay.co.uk/authenticity-guarantee-watches-seller/terms/
+https://www.psacard.com/articles/articleview/15161/psa-grading-now-built-into-ebay-checkout
+https://www.psacard.com/articles/articleview/15161/psa-grading-now-built-into-ebay-checkout
+https://www.entrupy.com/search-certificate/
+https://www.entrupy.com/search-certificate/
+https://www.psacard.com/services/psasecurityabuyersguide
+https://www.psacard.com/services/psasecurityabuyersguide
+https://www.psacard.com/cert/103527207/psa
+https://www.psacard.com/cert/103527207/psa
+https://www.psacard.com/info/psa-verified
+https://www.psacard.com/info/psa-verified
+https://www.psacard.com/services/tradingcardgrading/reholder
+https://www.psacard.com/services/tradingcardgrading/reholder
+https://www.globenewswire.com/news-release/2020/11/30/2136654/0/en/Collectors-Universe-to-be-
+Acquired-by-Investor-Group-Led-by-Entrepreneur-and-Collector-Nat-Turner-for-Approximately-700-
+Million.html
+https://www.globenewswire.com/news-release/2020/11/30/2136654/0/en/Collectors-Universe-to-be-Acquired-by-Investor-Group-
+Led-by-Entrepreneur-and-Collector-Nat-Turner-for-Approximately-700-Million.html
+1
+69
+2
+23
+3
+18
+26
+4
+28
+65
+5
+6
+56
+7
+49
+59
+66
+8
+68
+9
+53
+60
+10
+40
+51
+11
+12
+27
+54
+13
+14
+25
+15
+16
+50
+17
+31
+19
+27
+
+=== Page 28 ===
+https://www.businesswire.com/news/home/20210222005284/en/Investor-Group-Led-by-Nat-Turner-
+Completes-Acquisition-of-Collectors-Universe
+https://www.businesswire.com/news/home/20210222005284/en/Investor-Group-Led-by-Nat-Turner-Completes-Acquisition-of-
+Collectors-Universe
+https://www.psacard.com/articles/articleview/10556/collectors-universe-acquires-trading-card-valuation-
+platform-ladder
+https://www.psacard.com/articles/articleview/10556/collectors-universe-acquires-trading-card-valuation-platform-ladder
+https://www.prnewswire.com/news-releases/collectors-and-ebay-transactions-close-summer-launch-
+expected-for-integrated-end-to-end-hobby-experience-302148382.html
+https://www.prnewswire.com/news-releases/collectors-and-ebay-transactions-close-summer-launch-expected-for-integrated-
+end-to-end-hobby-experience-302148382.html
+https://www.collectors.com/leadership
+https://www.collectors.com/leadership
+https://support.psacard.com/s/article/verify-cert
+https://support.psacard.com/s/article/verify-cert
+https://ebay.com/authenticity-guarantee/handbags
+https://ebay.com/authenticity-guarantee/handbags
+https://www.news.cn/fashion/20230519/9fe7e42e3e084182a414c13f907ecb8e/c.html
+https://www.news.cn/fashion/20230519/9fe7e42e3e084182a414c13f907ecb8e/c.html
+https://bbx-pic.gtimg.com/bbx/pictures/2024/48_20240906150809_485299.pdf
+https://bbx-pic.gtimg.com/bbx/pictures/2024/48_20240906150809_485299.pdf
+https://www.reuters.com/business/retail-consumer/chinas-booming-grey-markets-add-woes-luxury-
+brands-2024-10-21/
+https://www.reuters.com/business/retail-consumer/chinas-booming-grey-markets-add-woes-luxury-brands-2024-10-21/
+https://apps.apple.com/tw/app/%E5%BE%97%E7%89%A9-
+%E5%BE%97%E5%88%B0%E7%BE%8E%E5%A5%BD%E4%BA%8B%E7%89%A9/id1012871328
+https://apps.apple.com/tw/app/%E5%BE%97%E7%89%A9-
+%E5%BE%97%E5%88%B0%E7%BE%8E%E5%A5%BD%E4%BA%8B%E7%89%A9/id1012871328
+https://www.ebay.com/help/buying/buying-authenticity-guarantee/buying-authenticity-guarantee?
+id=5470
+https://www.ebay.com/help/buying/buying-authenticity-guarantee/buying-authenticity-guarantee?id=5470
+https://discover.certilogo.com/pages/faq-consumer
+https://discover.certilogo.com/pages/faq-consumer
+https://www.nxp.com/products/rfid-nfc/nfc-hf/ntag-for-tags-and-labels/ntag-424-dna-424-dna-
+tagtamper-advanced-security-and-privacy-for-trusted-iot-applications%3ANTAG424DNA
+https://www.nxp.com/products/rfid-nfc/nfc-hf/ntag-for-tags-and-labels/ntag-424-dna-424-dna-tagtamper-advanced-security-and-
+privacy-for-trusted-iot-applications%3ANTAG424DNA
+https://rfid.averydennison.com/en/home/news-insights/insights/healthcare-circus-tamper-loop-a-
+new-digital-seal-for-your-products.html
+https://rfid.averydennison.com/en/home/news-insights/insights/healthcare-circus-tamper-loop-a-new-digital-seal-for-your-
+products.html
+20
+21
+22
+24
+29
+30
+43
+62
+32
+33
+61
+67
+34
+70
+35
+36
+37
+38
+39
+55
+28
+
+=== Page 29 ===
+https://stockx.com/help/articles/what-is-the-condition-of-items-sold-on-stockx
+https://stockx.com/help/articles/what-is-the-condition-of-items-sold-on-stockx
+https://www.goat.com/verification
+https://www.goat.com/verification
+https://www.ebay.com/help/selling/selling-tools/ebay-authenticity-guarantee?id=4644
+https://www.ebay.com/help/selling/selling-tools/ebay-authenticity-guarantee?id=4644
+https://www.entrupy.com/how-to-use/
+https://www.entrupy.com/how-to-use/
+https://www.entrupy.com/guarantee/luxury/
+https://www.entrupy.com/guarantee/luxury/
+https://www.chrono24.com/certified.htm
+https://www.chrono24.com/certified.htm
+https://about.chrono24.com/en/press/chrono24-debuts-new-certified-program-providing-transparency-
+and-an-authenticity-guarantee-to-the-worlds-largest-selection-of-pre-owned-watches
+https://about.chrono24.com/en/press/chrono24-debuts-new-certified-program-providing-transparency-and-an-authenticity-
+guarantee-to-the-worlds-largest-selection-of-pre-owned-watches
+https://www.psacard.com/vaulttermsandconditions
+https://www.psacard.com/vaulttermsandconditions
+https://www.vogue.com/article/chanel-wins-case-against-what-goes-around-comes-around
+https://www.vogue.com/article/chanel-wins-case-against-what-goes-around-comes-around
+https://law.justia.com/cases/federal/district-courts/new-york/nysdce/1%3A2022cv00983/574411/250/
+https://law.justia.com/cases/federal/district-courts/new-york/nysdce/1%3A2022cv00983/574411/250/
+https://www.psacard.com/
+https://www.psacard.com/
+41
+42
+44
+45
+46
+47
+48
+52
+57
+58
+63
+64
+29
+

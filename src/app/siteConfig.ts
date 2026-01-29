@@ -1,11 +1,17 @@
 export const siteConfig = {
-  name: "Dashboard",
-  url: "https://dashboard.tremor.so",
-  description: "The only dashboard you will ever need.",
+  name: "HSA Investment Report",
+  url: "https://hsa-report.example.com",
+  description: "Decision-Grade Trust Infrastructure Memo: Building the PSA of Hermès Bags",
   baseLinks: {
     home: "/",
     overview: "/overview",
-    details: "/details",
+    psa: "/psa",
+    comparables: "/comparables",
+    product: "/product",
+    security: "/security",
+    risk: "/risk",
+    roadmap: "/roadmap",
+    sources: "/sources",
     settings: "/settings",
   },
   externalLink: {

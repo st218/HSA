@@ -183,7 +183,7 @@ const triggerStyles = tv({
 
 interface TriggerProps
   extends React.ComponentProps<"button">,
-    VariantProps<typeof triggerStyles> {
+  VariantProps<typeof triggerStyles> {
   placeholder?: string
 }
 
@@ -556,7 +556,10 @@ const SingleDatePicker = ({
     setDate(newDate)
   }
 
-  const onTimeChange = (time: TimeValue) => {
+  const onTimeChange = (time: TimeValue | null) => {
+    if (!time) {
+      return
+    }
     setTime(time)
 
     if (!date) {
@@ -565,13 +568,8 @@ const SingleDatePicker = ({
 
     const newDate = new Date(date.getTime())
 
-    if (!time) {
-      newDate.setHours(0)
-      newDate.setMinutes(0)
-    } else {
-      newDate.setHours(time.hour)
-      newDate.setMinutes(time.minute)
-    }
+    newDate.setHours(time.hour)
+    newDate.setMinutes(time.minute)
 
     setDate(newDate)
   }
@@ -804,7 +802,11 @@ const RangeDatePicker = ({
     setOpen(open)
   }
 
-  const onTimeChange = (time: TimeValue, pos: "start" | "end") => {
+  const onTimeChange = (time: TimeValue | null, pos: "start" | "end") => {
+    if (!time) {
+      return
+    }
+
     switch (pos) {
       case "start":
         setStartTime(time)
@@ -824,14 +826,8 @@ const RangeDatePicker = ({
       }
 
       const newDate = new Date(range.from.getTime())
-
-      if (!time) {
-        newDate.setHours(0)
-        newDate.setMinutes(0)
-      } else {
-        newDate.setHours(time.hour)
-        newDate.setMinutes(time.minute)
-      }
+      newDate.setHours(time.hour)
+      newDate.setMinutes(time.minute)
 
       setRange({
         ...range,
@@ -845,14 +841,8 @@ const RangeDatePicker = ({
       }
 
       const newDate = new Date(range.to.getTime())
-
-      if (!time) {
-        newDate.setHours(0)
-        newDate.setMinutes(0)
-      } else {
-        newDate.setHours(time.hour)
-        newDate.setMinutes(time.minute)
-      }
+      newDate.setHours(time.hour)
+      newDate.setMinutes(time.minute)
 
       setRange({
         ...range,
@@ -869,9 +859,9 @@ const RangeDatePicker = ({
         ? new Time(value.from.getHours(), value.from.getMinutes())
         : defaultValue?.from
           ? new Time(
-              defaultValue.from.getHours(),
-              defaultValue.from.getMinutes(),
-            )
+            defaultValue.from.getHours(),
+            defaultValue.from.getMinutes(),
+          )
           : new Time(0, 0),
     )
     setEndTime(
@@ -888,9 +878,8 @@ const RangeDatePicker = ({
       return null
     }
 
-    return `${
-      range.from ? formatDate(range.from, locale, showTimePicker) : ""
-    } - ${range.to ? formatDate(range.to, locale, showTimePicker) : ""}`
+    return `${range.from ? formatDate(range.from, locale, showTimePicker) : ""
+      } - ${range.to ? formatDate(range.to, locale, showTimePicker) : ""}`
   }, [range, locale, showTimePicker])
 
   const onApply = () => {
@@ -1134,8 +1123,7 @@ const validatePresets = (
 
           if (presetDay && presetDay < fromDay.getDate()) {
             throw new Error(
-              `Preset ${
-                preset.dateRange.from
+              `Preset ${preset.dateRange.from
               }'s 'from' is before fromDay ${format(fromDay, "MMM dd, yyyy")}.`,
             )
           }
@@ -1196,3 +1184,4 @@ const DateRangePicker = ({ presets, ...props }: RangeDatePickerProps) => {
 DateRangePicker.displayName = "DateRangePicker"
 
 export { DatePicker, DateRangePicker, type DatePreset, type DateRangePreset }
+
